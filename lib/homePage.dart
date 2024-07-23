@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_5_5/cart.dart';
 import 'package:ui_5_5/global.dart';
 
 class Homepage extends StatefulWidget {
@@ -12,7 +13,9 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.pink.shade50,
       appBar: AppBar(
+        backgroundColor: Colors.pink.shade50,
         leading:  Icon(Icons.menu),
         actions: [
           Padding(
@@ -105,8 +108,8 @@ class _HomepageState extends State<Homepage> {
             Padding(
               padding: EdgeInsets.only(left: 15),
               child: Text(
-                'Catagories',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                'Categories',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
               ),
             ),
             Padding(
@@ -133,7 +136,7 @@ class _HomepageState extends State<Homepage> {
               alignment: Alignment.center,
               child: Text(
                 booksCatogary[index],
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w600),
               ),
             ),
           )),
@@ -145,42 +148,54 @@ class _HomepageState extends State<Homepage> {
               children: [
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Row(
-                      children: List.generate(
-                    product.length,
-                    (index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 300,
-                            width: 200,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                                borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(product[index]['img'])),
-                            ),
+                  child: Wrap(
+                    children: [Row(
+                        children: List.generate(
+                      product.length,
+                      (index) => GestureDetector(
+                        onTap: (){
+                          selectindex=index;
+                          Navigator.of(context).pushNamed('/detail');
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 250,
+                                width: 170,
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                    borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(product[index]['img'])),
+                                ),
+                              ),
+                              Text(
+                                (product[index]['name']),
+                                style: const TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                (product[index]['writer']),
+                                style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    fontSize: 19, color: Colors.grey),
+                              ),
+                              Text(
+                               '\$ ${(product[index]['price']).toString()} ⭐',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
-                          Text(
-                            (product[index]['name']),
-                            style: const TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            (product[index]['writer']),
-                            style: TextStyle(fontSize: 20, color: Colors.grey),
-                          ),
-                          Text(
-                            (product[index]['price']),
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  )),
+                    )),
+            ],
+                  ),
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -192,8 +207,8 @@ class _HomepageState extends State<Homepage> {
                       child: Column(
                         children: [
                           Container(
-                            height: 300,
-                            width: 200,
+                            height: 250,
+                            width: 170,
                             decoration: BoxDecoration(
                               color: Colors.red,
                               borderRadius: BorderRadius.circular(20),
@@ -206,14 +221,18 @@ class _HomepageState extends State<Homepage> {
                           Text(
                             (product2[index]['name']),
                             style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                           Text(
                             (product2[index]['writer']),
-                            style: TextStyle(fontSize: 20, color: Colors.grey),
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                fontSize: 19,
+                                color: Colors.grey),
                           ),
                           Text(
-                            (product2[index]['price']),
+                            ' \$ ${(product2[index]['price']).toString()} ⭐',
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold),
                           ),
