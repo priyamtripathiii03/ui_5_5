@@ -16,12 +16,8 @@ class _CartPageState extends State<CartPage> {
       bottomNavigationBar: BottomAppBar(
         child: GestureDetector(
           onTap: () {
-            for (int i = 0; i < cart.length; i++) {
-              qty = qty + cart[i]['price'].toInt();
-              amount = amount + cart[i]['price'];
-            }
-            Navigator.of(context).pushNamed('/total');
-            // total = (amount * 18) / 100 + amount;
+            Navigator.of(context).pushReplacementNamed('/total');
+
           },
           child: Container(
             margin: EdgeInsets.only(left: 20, top: 10),
@@ -44,7 +40,7 @@ class _CartPageState extends State<CartPage> {
       appBar: AppBar(
         leading: InkWell(
           onTap: () {
-            Navigator.of(context).pop('/total');
+            Navigator.of(context).pop();
           },
           child: Icon(Icons.arrow_back),
         ),
@@ -91,22 +87,22 @@ class _CartPageState extends State<CartPage> {
                               ),
                             ],
                           ),
-                          InkWell(
-                            onTap: (){
-                              setState(() {
-                                cart.removeAt(index);
-                              });
-                            },
-                            child: Icon(Icons.delete),
-                          )
+                          GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  cart.removeAt(index);
+                                });
+                              },
+                              child: Icon(Icons.delete))
                         ],
                       ),
-                    ))
+                    ),),
           ],
         ),
       ),
     );
   }
+
 }
 
 int index = 0;
@@ -114,3 +110,13 @@ double qty = 0;
 double amount = 0;
 
 int total = 0;
+
+void fun(List cart)
+{
+
+  for (int i = 0; i < cart.length; i++) {
+    qty = qty + cart[i]['price'].toInt();
+    amount = amount + cart[i]['price'];
+  }
+
+}

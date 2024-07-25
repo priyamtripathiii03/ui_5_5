@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'cart.dart';
+import 'global.dart';
 
 class Total extends StatefulWidget {
   const Total({super.key});
@@ -16,7 +16,7 @@ class _TotalState extends State<Total> {
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.pink.shade300,
         centerTitle: true,
         title: Text(
           'Total Bill',
@@ -24,8 +24,7 @@ class _TotalState extends State<Total> {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
-          },
+            Navigator.of(context).pop();},
           icon: Icon(
             Icons.arrow_back_ios_rounded,
             color: Colors.white,
@@ -37,6 +36,7 @@ class _TotalState extends State<Total> {
       bottomNavigationBar: BottomAppBar(
         child: GestureDetector(
           onTap: () {
+
             Navigator.of(context).pushReplacement('/home' as Route<Object?>);
       },
           child: Container(
@@ -91,8 +91,8 @@ class _TotalState extends State<Total> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Discount"),
-                      Text("0.0"),
+                      Text("Amount"),
+                      Text( '\$ ${product[index]['price'].toString()}',),
                     ],
                   ),
                   SizedBox(
@@ -120,7 +120,11 @@ class _TotalState extends State<Total> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Total"),
-                      Text("$total"),
+                      Text(
+                        '\$ ${product[index]['price'].toString()}',
+
+                      ),
+
                     ],
                   ),
                 ],
@@ -131,4 +135,16 @@ class _TotalState extends State<Total> {
       ),
     );
   }
+}
+
+double total(List product)
+{
+  dynamic sum=0;
+  for(int i=0;i<product.length;i++)
+  {
+    sum=sum+product[i]['price'];
+  }
+  dynamic total=(sum*18)/100;
+
+  return total;
 }

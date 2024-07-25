@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ui_5_5/global.dart';
 
+import 'cart.dart';
+
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
 
@@ -49,32 +51,38 @@ class _DetailPageState extends State<DetailPage> {
             ),
             InkWell(
               onTap: () {
-                cart.add(selectindex);
                 Navigator.of(context).pushNamed('/cart');
+                cart.add(selectindex);
+
               },
               child: Padding(
                 padding: const EdgeInsets.only(top: 25),
                 child: Container(
-                  height: 70,
-                  width: 250,
+                  alignment: Alignment.center,
+                  height: 60,
+                  width: 180,
                   decoration: BoxDecoration(
                       color: Colors.red.shade500,
                       borderRadius: BorderRadius.circular(15)),
                     child: Center(
                       child: Row(
                         children: [
-                          Text(
-                            'Add To Cart',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
+                          Center(
+                            child: Text(
+                              '      Add To Cart',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
-                          Icon(
-                            Icons.shopping_bag_outlined,
-                            color: Colors.white,
-                            size: 22,
-                          )
+                          Center(
+                            child: Icon(
+                              Icons.shopping_bag_outlined,
+                              color: Colors.white,
+                              size: 22,
+                            ),
+                          ),
                         ],
                       ),
                     ),
